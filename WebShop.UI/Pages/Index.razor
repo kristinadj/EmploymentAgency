@@ -1,9 +1,19 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+<AuthorizeView>
+    <Authorized>
 
-<h1>Hello, world!</h1>
+    </Authorized>
 
-Welcome to your new app.
+    <NotAuthorized>
+        <EditForm Context="formContext" Model="signInDTO" OnValidSubmit="Submit">
+            <DataAnnotationsValidator/>
+            <MudTextField Label="Username" @bind-Value="signInDTO.UserName" For="@(() => signInDTO.UserName)"/>
+            <MudTextField Label="Password" @bind-Value="signInDTO.Password" For="@(() => signInDTO.Password)" InputType="InputType.Password"/>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+                <div class="d-flex justify-end gap-2">
+                    <MudButton Variant="Variant.Filled" Color="Color.Secondary" ButtonType="ButtonType.Submit">Login</MudButton>
+                </div>
+        </EditForm>
+    </NotAuthorized>
+</AuthorizeView>

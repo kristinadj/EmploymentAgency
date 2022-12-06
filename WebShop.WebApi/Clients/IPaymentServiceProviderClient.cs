@@ -5,7 +5,7 @@ using RestEase;
 using Steeltoe.Common.Discovery;
 using Steeltoe.Discovery;
 
-namespace WebShop.WebApi.Clients
+namespace WebShopApp.WebApi.Clients
 {
     public interface IPaymentServiceProviderClient
     {

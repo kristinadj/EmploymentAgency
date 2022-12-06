@@ -1,19 +1,22 @@
 ﻿@inherits LayoutComponentBase
 
-<PageTitle>WebShop.UI</PageTitle>
+<MudThemeProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+<MudLayout>
+    <MudAppBar Fixed="true" Elevation="0">
+        <div class="cursor-pointer" @onclick="OnClickHome">
+            <MudText>Employment Agency Web Shop</MudText>
         </div>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+        <MudSpacer />
+
+        <LoginAppBarDisplay></LoginAppBarDisplay>
+    </MudAppBar>
+
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+

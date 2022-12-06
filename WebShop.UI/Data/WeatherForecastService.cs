@@ -1,4 +1,4 @@
-namespace WebShop.UI.Data
+namespace WebShopApp.UI.Data
 {
     public class WeatherForecastService
     {

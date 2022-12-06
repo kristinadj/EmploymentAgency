@@ -1,6 +1,6 @@
-﻿using WebShop.WebApi.Clients;
+﻿using WebShopApp.WebApi.Clients;
 
-namespace WebShop.WebApi
+namespace WebShopApp.WebApi
 {
     public static class RestClientsInstaller
     {

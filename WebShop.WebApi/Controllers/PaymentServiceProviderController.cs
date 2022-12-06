@@ -1,8 +1,8 @@
 using EmploymentAgency.DTO;
 using Microsoft.AspNetCore.Mvc;
-using WebShop.WebApi.Clients;
+using WebShopApp.WebApi.Clients;
 
-namespace WebShop.WebApi.Controllers
+namespace WebShopApp.WebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
