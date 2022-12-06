@@ -8,7 +8,7 @@
     <NotAuthorized>
         <EditForm Context="formContext" Model="signInDTO" OnValidSubmit="Submit">
             <DataAnnotationsValidator/>
-            <MudTextField Label="Username" @bind-Value="signInDTO.UserName" For="@(() => signInDTO.UserName)"/>
+            <MudTextField Label="Username" @bind-Value="signInDTO.Username" For="@(() => signInDTO.Username)"/>
             <MudTextField Label="Password" @bind-Value="signInDTO.Password" For="@(() => signInDTO.Password)" InputType="InputType.Password"/>
 
                 <div class="d-flex justify-end gap-2">
