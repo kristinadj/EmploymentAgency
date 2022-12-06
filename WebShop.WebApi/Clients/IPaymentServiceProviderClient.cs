@@ -5,15 +5,15 @@ using RestEase;
 using Steeltoe.Common.Discovery;
 using Steeltoe.Discovery;
 
-namespace BankPaymentService.WebApi.Clients
+namespace WebShop.WebApi.Clients
 {
     public interface IPaymentServiceProviderClient
     {
         [Get("Health")]
         Task<string> TestConnectionAsync();
 
-        [Post("PaymentTypeService/Register")]
-        Task<PaymentTypeServiceDTO> RegisterAsync([Body] PaymentTypeServiceDTO paymentTypeServiceDTO);
+        [Post("WebShop/Register")]
+        Task<WebShopDTO> RegisterAsync([Body] WebShopDTO webShopDTO);
     }
 
     public class PaymentServiceProviderClient : IPaymentServiceProviderClient
@@ -40,9 +40,9 @@ namespace BankPaymentService.WebApi.Clients
             return _retryPolicy.ExecuteAsync(async () => await _client.TestConnectionAsync());
         }
 
-        public Task<PaymentTypeServiceDTO> RegisterAsync(PaymentTypeServiceDTO paymentTypeServiceDTO)
+        public Task<WebShopDTO> RegisterAsync(WebShopDTO webShopDTO)
         {
-            return _retryPolicy.ExecuteAsync(async () => await _client.RegisterAsync(paymentTypeServiceDTO));
+            return _retryPolicy.ExecuteAsync(async () => await _client.RegisterAsync(webShopDTO));
         }
     }
 }

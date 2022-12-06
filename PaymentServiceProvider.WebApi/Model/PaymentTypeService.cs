@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PaymentServiceProvider.WebApi.Model
 {
-    [Table("PaymentServices", Schema = "dbo")]
+    [Table("PaymentTypeServices", Schema = "dbo")]
     public class PaymentTypeService
     {
         [Key]
@@ -17,5 +17,7 @@ namespace PaymentServiceProvider.WebApi.Model
         [StringLength(50)]
         public string Uri { get; set; }
         public bool IsActive { get; set; }
+
+        public List<SupportedPaymentTypeService> SupportedPaymentTypes { get; set; }
     }
 }

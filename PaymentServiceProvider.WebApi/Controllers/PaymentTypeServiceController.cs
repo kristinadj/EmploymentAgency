@@ -34,7 +34,7 @@ namespace PaymentServiceProvider.WebApi.Controllers
             return Ok(paymentService);
         }
 
-        [HttpPost]
+        [HttpPost("Register")]
         public async Task<ActionResult<PaymentTypeServiceDTO>> AddPaymentService([FromBody] PaymentTypeServiceDTO paymentServiceDTO)
         {
             try

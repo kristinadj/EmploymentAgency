@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PaymentServiceProvider.WebApi.Model;
 
@@ -11,9 +12,11 @@ using PaymentServiceProvider.WebApi.Model;
 namespace PaymentServiceProvider.WebApi.Migrations
 {
     [DbContext(typeof(PaymentServiceProviderContext))]
-    partial class PaymentServiceProviderContextModelSnapshot : ModelSnapshot
+    [Migration("20221206141111_AddedWebShop")]
+    partial class AddedWebShop
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,6 +95,7 @@ namespace PaymentServiceProvider.WebApi.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<int?>("ParentWebShopId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("TransactionErrorWebhook")

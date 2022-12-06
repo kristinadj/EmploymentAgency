@@ -1,7 +1,11 @@
-using BankPaymentService.WebApi;
+using Microsoft.EntityFrameworkCore;
 using Steeltoe.Discovery.Client;
+using WebShop.WebApi;
+using WebShop.WebApi.Model;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// builder.Services.AddDbContext<WebShopContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MainDatabase")));
 
 builder.Services.AddDiscoveryClient(builder.Configuration);
 builder.Services.AddPaymentServiceProviderRestClient();

@@ -10,6 +10,9 @@ namespace PaymentServiceProvider.WebApi.Mappings
         {
             CreateMap<PaymentTypeService, PaymentTypeServiceDTO>();
             CreateMap<PaymentTypeServiceDTO, PaymentTypeService>();
+
+            CreateMap<WebShop, WebShopDTO>();
+            CreateMap<WebShopDTO, WebShop>();
         }
     }
 }

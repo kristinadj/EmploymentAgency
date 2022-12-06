@@ -20,13 +20,11 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 #region Services
 builder.Services.AddScoped<IPaymentTypeServices, PaymentTypeServices>();
-builder.Services.AddScoped<IPaymentTypeServiceClient, PaymentTypeServiceClient>();
+builder.Services.AddScoped<IWebShopServices, WebShopServices>();
 #endregion
 
 #region Clients
-
 builder.Services.AddScoped<PaymentTypeServiceClient>();
-
 #endregion
 
 var app = builder.Build();
