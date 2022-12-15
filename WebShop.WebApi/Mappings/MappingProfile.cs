@@ -11,6 +11,9 @@ namespace WebShopApp.WebApi.Mappings
 
             CreateMap<WebShop, WebShopDTO>();
             CreateMap<WebShopDTO, WebShop>();
+
+            CreateMap<UserDTO, User>()
+                .ForMember(d => d.UserName, s => s.MapFrom(x => x.Username));
         }
     }
 }

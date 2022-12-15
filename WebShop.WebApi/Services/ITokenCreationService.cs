@@ -9,7 +9,7 @@ namespace WebShopApp.WebApi.Services
 {
     public interface ITokenCreationService
     {
-        public TokenDTO CreateToken(User user);
+        public LoginResultDTO CreateToken(User user);
     }
 
     public class JwtService : ITokenCreationService
@@ -23,7 +23,7 @@ namespace WebShopApp.WebApi.Services
             _configuration = configuration;
         }
 
-        public TokenDTO CreateToken(User user)
+        public LoginResultDTO CreateToken(User user)
         {
             var expiration = DateTime.UtcNow.AddMinutes(EXPIRATION_MINUTES);
 
@@ -35,7 +35,7 @@ namespace WebShopApp.WebApi.Services
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            return new TokenDTO
+            return new LoginResultDTO
             {
                 Token = tokenHandler.WriteToken(token),
                 Expiration = expiration

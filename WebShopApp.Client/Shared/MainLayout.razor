@@ -1,0 +1,29 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager Navigation
+
+<MudThemeProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+
+<MudLayout>
+    <MudAppBar Fixed="true" Elevation="0">
+        <div class="cursor-pointer" @onclick="OnClickHome">
+            <MudText>Employment Agency Web Shop</MudText>
+        </div>
+
+        <MudSpacer />
+
+        <LoginAppBarDisplay></LoginAppBarDisplay>
+    </MudAppBar>
+
+    <MudMainContent Class="content px-4">
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+@code{
+    private void OnClickHome(MouseEventArgs e)
+    {
+        Navigation.NavigateTo("/");
+    }
+}

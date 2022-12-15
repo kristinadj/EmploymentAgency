@@ -1,0 +1,20 @@
+﻿@page "/"
+@inject NavigationManager Navigation
+
+<AuthorizeView>
+    <Authorized>
+        <div class="pa-4">
+            <h1>Hello, @context?.User?.Identity?.Name !</h1>
+
+            <p>Welcome to your new app.</p>
+        </div>
+        
+    </Authorized>
+    <NotAuthorized>
+        @{
+            Navigation.NavigateTo("/login");
+        }
+    </NotAuthorized>
+</AuthorizeView>
+
+

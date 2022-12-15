@@ -37,6 +37,9 @@ namespace WebShopApp.WebApi.Controllers
                 return BadRequest("Passwords doesn't match");
 
             var user = _mapper.Map<User>(userDTO);
+            user.Role = Util.Role.USER;
+            user.IsPremiumAccount = false;
+
             var result = await _userManager.CreateAsync(user, userDTO.Password);
 
             if (!result.Succeeded)
@@ -45,14 +48,14 @@ namespace WebShopApp.WebApi.Controllers
             return Ok();
         }
 
-        [HttpPost("SignIn")]
-        public async Task<ActionResult<TokenDTO>> SignInAsync([FromBody] SignInDTO signInDTO)
+        [HttpPost("Authenticate")]
+        public async Task<ActionResult<LoginResultDTO>> Login([FromBody] LoginDTO loginDTO)
         {
-            var user = await _userManager.FindByNameAsync(signInDTO.Username);
+            var user = await _userManager.FindByNameAsync(loginDTO.Username);
             if (user == null)
                 return BadRequest("Bad credentials");
 
-            var isPasswordValid = await _userManager.CheckPasswordAsync(user, signInDTO.Password);
+            var isPasswordValid = await _userManager.CheckPasswordAsync(user, loginDTO.Password);
             if (!isPasswordValid)
                 return BadRequest("Bad credentials");
 

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using EmploymentAgency.DTO;
 using Microsoft.EntityFrameworkCore;
-using PaymentServiceProvider.WebApi.Clients;
 using PaymentServiceProvider.WebApi.Model;
 
 namespace PaymentServiceProvider.WebApi.Services
@@ -9,7 +8,7 @@ namespace PaymentServiceProvider.WebApi.Services
     public interface IWebShopServices
     {
         public Task<WebShopDTO> RegisterAsync(WebShopDTO webShopDTO);
-        public Task<WebShopDTO> GetByIdAsync(int id);
+        public Task<WebShopDTO?> GetByIdAsync(int id);
         public Task<bool> AddPaymentTypeAsync(int webShopId, int paymentTypeServiceId);
         public Task<bool> RemovePaymentTypeAsync(int webShopId, int paymentTypeServiceId);
     }
@@ -29,7 +28,7 @@ namespace PaymentServiceProvider.WebApi.Services
         {
             var webShop = await _context.WebShops.FindAsync(webShopId);
             if (webShop == null) throw new Exception($"Invalid webShopId {webShopId}");
-            
+
             var paymentTypeService = await _context.PaymentServices.FindAsync(paymentTypeServiceId);
             if (paymentTypeService == null) throw new Exception($"Invalid paymentTypeServiceId {paymentTypeServiceId}");
 

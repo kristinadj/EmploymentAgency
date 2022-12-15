@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Steeltoe.Discovery.Client;
@@ -12,6 +13,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<WebShopContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MainDatabase")));
 
 // CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", new CorsPolicyBuilder()
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowAnyOrigin()
+        .Build());
+});
 
 builder.Services.AddIdentityCore<User>(options =>
 {
@@ -67,8 +76,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(c => c.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

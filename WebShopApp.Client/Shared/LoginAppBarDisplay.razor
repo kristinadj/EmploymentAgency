@@ -1,0 +1,13 @@
+﻿<AuthorizeView>
+    <Authorized>
+        <MudStack Row="false" Spacing="0" AlignItems="AlignItems.End" Class="pe-4">
+            <MudText Typo="Typo.h6"> Company Name </MudText>
+            <MudText  Typo="Typo.subtitle1">User</MudText>
+        </MudStack>
+        <MudButton Href="/logout" Color="Color.Inherit">Logout</MudButton>
+    </Authorized>
+
+    <NotAuthorized>
+        <MudButton Color="Color.Inherit">Register Company</MudButton>
+    </NotAuthorized>
+</AuthorizeView>
