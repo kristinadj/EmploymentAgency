@@ -20,7 +20,7 @@
                             <MudTextField Label="Last Name" @bind-Value="model.LastName" Class="form-control" For="@(() => model.LastName)"/>
                         </div>
                         <div class="form-group">
-                            <MudTextField Label="Email" @bind-Value="model.Email" InputType="InputType.Password" Class="form-control" For="@(() => model.Email)"/>
+                            <MudTextField Label="Email" @bind-Value="model.Email" Class="form-control" For="@(() => model.Email)"/>
                         </div>
                         <div class="form-group">
                             <MudTextField Label="Username" @bind-Value="model.Username" Class="form-control" For="@(() => model.Username)"/>
@@ -66,16 +66,15 @@
             }
             else
             {
+                loading = false;
                 Snackbar.Add("Some exception ocurred", Severity.Error);
+                StateHasChanged();
             }
-            
-
-            loading = false;
         }
         catch (Exception ex)
         {
-            Snackbar.Add(ex.Message, Severity.Error);
             loading = false;
+            Snackbar.Add(ex.Message, Severity.Error);
             StateHasChanged();
         }
     }

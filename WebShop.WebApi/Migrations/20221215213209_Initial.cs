@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebShopApp.WebApi.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -284,7 +284,7 @@ namespace WebShopApp.WebApi.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "AdminToWebShopId", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsPremiumAccount", "LastName", "LockoutEnabled", "LockoutEnd", "ManagedCompanyId", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "a18be9c0-aa65-4af8-bd17-00bd9344e575", 0, null, "d26581ec-aa16-4183-aa00-c3dc9511b199", "admin@webshop.com", false, "Joseph", false, "Weber", false, null, null, null, null, "AQAAAAEAACcQAAAAEPU6xm2aicljoAiY/OZpsbntyU6WCQqlJKWF4f8wZMJji8R4QBK0Bz/KxT1UxK3Ybg==", null, false, 2, "2e20667b-a01e-4cef-bf3f-96d48dc3bc67", false, "MainWebShop-Admin" });
+                values: new object[] { "a18be9c0-aa65-4af8-bd17-00bd9344e575", 0, null, "060e148b-7a51-444b-a20e-4371a2d560a1", "admin@webshop.com", false, "Joseph", false, "Weber", false, null, null, "ADMIN@WEBSHOP.COM", "ADMIN", "AQAAAAEAACcQAAAAEFvrsLe18uejdAEH+7vKXmzMge4r7hI2PoJycVjMwz1/CD5qe3T0Mxg3A4BOip88bA==", null, false, 2, "1f280abe-f9ef-4c6e-8663-1f88937ed3fb", false, "Admin" });
 
             migrationBuilder.InsertData(
                 schema: "dbo",

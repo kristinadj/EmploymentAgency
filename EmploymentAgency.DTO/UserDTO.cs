@@ -28,6 +28,7 @@ namespace EmploymentAgency.DTO
         public string ConfirmPassword { get; set; }
 
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
     }
 }

@@ -53,16 +53,21 @@
         {
             var result = await AuthService.Login(model);
             if (result != null)
+            {
                 NavigationManager.NavigateTo("/");
+            }
             else
+            {
+                loading = false;
                 Snackbar.Add("Bad credentials", Severity.Error);
+                StateHasChanged();
+            }
 
-            loading = false;
         }
         catch (Exception ex)
         {
-            Snackbar.Add(ex.Message, Severity.Error);
             loading = false;
+            Snackbar.Add(ex.Message, Severity.Error);
             StateHasChanged();
         }
     }

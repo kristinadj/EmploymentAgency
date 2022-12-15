@@ -100,9 +100,11 @@ namespace WebShopApp.WebApi.Model
                 FirstName = "Joseph",
                 LastName = "Weber",
                 Role = Role.WEB_SHOP_ADMIN,
-                UserName = "MainWebShop-Admin",
+                UserName = "Admin",
+                NormalizedUserName = "ADMIN",
                 PasswordHash = hasher.HashPassword(null, "Admin123#"),
                 Email = "admin@webshop.com",
+                NormalizedEmail = "ADMIN@WEBSHOP.COM",
                 IsPremiumAccount = false,
             });
 

@@ -12,8 +12,8 @@ using WebShopApp.WebApi.Model;
 namespace WebShopApp.WebApi.Migrations
 {
     [DbContext(typeof(WebShopContext))]
-    [Migration("20221206213548_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20221215213209_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -468,19 +468,21 @@ namespace WebShopApp.WebApi.Migrations
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d26581ec-aa16-4183-aa00-c3dc9511b199",
+                            ConcurrencyStamp = "060e148b-7a51-444b-a20e-4371a2d560a1",
                             Email = "admin@webshop.com",
                             EmailConfirmed = false,
                             FirstName = "Joseph",
                             IsPremiumAccount = false,
                             LastName = "Weber",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEPU6xm2aicljoAiY/OZpsbntyU6WCQqlJKWF4f8wZMJji8R4QBK0Bz/KxT1UxK3Ybg==",
+                            NormalizedEmail = "ADMIN@WEBSHOP.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFvrsLe18uejdAEH+7vKXmzMge4r7hI2PoJycVjMwz1/CD5qe3T0Mxg3A4BOip88bA==",
                             PhoneNumberConfirmed = false,
                             Role = 2,
-                            SecurityStamp = "2e20667b-a01e-4cef-bf3f-96d48dc3bc67",
+                            SecurityStamp = "1f280abe-f9ef-4c6e-8663-1f88937ed3fb",
                             TwoFactorEnabled = false,
-                            UserName = "MainWebShop-Admin"
+                            UserName = "Admin"
                         });
                 });
 

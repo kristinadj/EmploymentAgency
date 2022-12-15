@@ -14,7 +14,6 @@ namespace WebShopApp.WebApi.Services
 
     public class JwtService : ITokenCreationService
     {
-        private const int EXPIRATION_MINUTES = 1;
 
         private readonly IConfiguration _configuration;
 
@@ -25,7 +24,8 @@ namespace WebShopApp.WebApi.Services
 
         public LoginResultDTO CreateToken(User user)
         {
-            var expiration = DateTime.UtcNow.AddMinutes(EXPIRATION_MINUTES);
+            var expirationMinutes = int.Parse(_configuration["Jwt:ExpiresInMinutes"]);
+            var expiration = DateTime.UtcNow.AddMinutes(expirationMinutes);
 
             var token = CreateJwtToken(
                 CreateClaims(user),
