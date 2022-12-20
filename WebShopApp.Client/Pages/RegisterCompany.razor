@@ -1,0 +1,116 @@
+﻿@page "/registerCompany"
+
+@inject IApiServices ApiServices;
+
+<div class="container pa-4">
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Register Company</h5>
+                    <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+                        <DataAnnotationsValidator />
+                        <MudTabs>
+                            <MudTabPanel Text="1 Company Info">
+                                <div class="form-group">
+                                    <MudTextField Label="Company Name" @bind-Value="model.Company.Name" Class="form-control" For="@(() => model.Company.Name)"/>
+                                </div>
+                                <div class="form-group">
+                                    <MudTextField Label="Web Url" @bind-Value="model.Company.WebUrl" Class="form-control" For="@(() => model.Company.WebUrl)"/>
+                                </div>
+                                <div class="form-group">
+                                    <MudTextField Label="Email" @bind-Value="model.Company.Email" Class="form-control" For="@(() => model.Company.Email)"/>
+                                </div>
+                                <div class="form-group">
+                                    <MudTextField Label="Phone Number" @bind-Value="model.Company.PhoneNumber" Class="form-control" For="@(() => model.Company.PhoneNumber)"/>
+                                </div>
+                                <div class="form-group">
+                                    <MudTextField Label="Industry" @bind-Value="model.Company.Industry" Class="form-control" For="@(() => model.Company.Industry)"/>
+                                </div>
+                            </MudTabPanel>
+                            <MudTabPanel Text="2 Manager Info">
+                                <div class="form-group">
+                                    <MudTextField Label="First Name" @bind-Value="model.Manager.FirstName" Class="form-control" For="@(() => model.Manager.FirstName)"/>
+                                </div>
+                                <div class="form-group">
+                                    <MudTextField Label="Last Name" @bind-Value="model.Manager.LastName" Class="form-control" For="@(() => model.Manager.LastName)"/>
+                                </div>
+                                <div class="form-group">
+                                    <MudTextField Label="Email" @bind-Value="model.Manager.Email" Class="form-control" For="@(() => model.Manager.Email)"/>
+                                </div>
+                                <div class="form-group">
+                                    <MudTextField Label="Username" @bind-Value="model.Manager.Username" Class="form-control" For="@(() => model.Manager.Username)"/>
+                                </div>
+                                <div class="form-group">
+                                    <MudTextField Label="Password" @bind-Value="model.Manager.Password" InputType="InputType.Password" Class="form-control" For="@(() => model.Manager.Password)"/>
+                                </div>
+                                <div class="form-group">
+                                    <MudTextField Label="Confirm Password" @bind-Value="model.Manager.ConfirmPassword" InputType="InputType.Password" Class="form-control" For="@(() => model.Manager.ConfirmPassword)"/>
+                                </div>
+                            </MudTabPanel>
+                            <MudTabPanel Text="3 Payment">
+                                <MudPaper Class="d-flex justify-center flex-grow-1 gap-4">
+                                    @foreach (var subscriptionPlan in subscriptionPlans)
+                                    {
+                                        <MudCard Style="@StyleSubscriptionPlanCard(subscriptionPlan.Id)">
+                                            <MudCardContent>
+                                                <MudText Typo="Typo.h5">@subscriptionPlan.Price @subscriptionPlan.CurrencyCode</MudText>
+                                                <MudText Typo="Typo.body2">@subscriptionPlan.Description</MudText>
+                                            
+                                            </MudCardContent>
+                                            <MudCardActions>
+                                                <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="(() => selectedSubscriptionPlan = subscriptionPlan.Id)">Choose</MudButton>
+                                            </MudCardActions>
+                                        </MudCard>
+                                    }
+                                </MudPaper>
+                                <MudDivider />
+                                <MudPaper Class="d-flex justify-center flex-grow-1 gap-4 pa-2" Elevation="0">
+                                    <MudRadioGroup T="int" @bind-SelectedOption="selectedPaymentType">
+                                        @foreach (var paymentType in supportedPaymentTypes)
+                                        {
+                                            <MudRadio Option="@paymentType.Id">@paymentType.Name</MudRadio>
+                                        }
+                                    </MudRadioGroup>
+                                    
+                                </MudPaper>
+                            </MudTabPanel>
+                        </MudTabs>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm"></div>
+    </div>
+</div>
+
+@code {
+    private RegisterCompanyDTO model = new RegisterCompanyDTO
+    {
+        Company = new CompanyDTO(),
+        Manager = new UserDTO()
+    };
+    private List<PaymentTypeServiceDTO> supportedPaymentTypes = new List<PaymentTypeServiceDTO>();
+    private List<SubscriptionPlanDTO> subscriptionPlans = new List<SubscriptionPlanDTO>();
+    private int selectedPaymentType { get; set; }
+    private int? selectedSubscriptionPlan { get; set; }
+
+    protected override async void OnInitialized()
+    {
+        var parentWebShop = await ApiServices.GetParentWebShopAsync();
+        supportedPaymentTypes = await ApiServices.GetPaymentTypeServicesAsync(parentWebShop.Id);
+        subscriptionPlans = await ApiServices.GetSubscriptionPlansAsync();
+    }
+
+    private string StyleSubscriptionPlanCard(int id)
+    {
+       if (selectedSubscriptionPlan != id) return "";
+       return "background:BlanchedAlmond";
+    }
+
+    private void OnValidSubmit()
+    {
+        Console.WriteLine("Registered!");
+    }
+}

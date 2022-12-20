@@ -17,5 +17,6 @@ namespace WebShopApp.WebApi.Model
         public string Code { get; set; }
 
         public ICollection<Service> Services { get; set; }
+        public ICollection<SubscriptionPlan> SubscriptionPackages { get; set; }
     }
 }

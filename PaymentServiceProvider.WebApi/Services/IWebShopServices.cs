@@ -11,6 +11,8 @@ namespace PaymentServiceProvider.WebApi.Services
         public Task<WebShopDTO?> GetByIdAsync(int id);
         public Task<bool> AddPaymentTypeAsync(int webShopId, int paymentTypeServiceId);
         public Task<bool> RemovePaymentTypeAsync(int webShopId, int paymentTypeServiceId);
+
+        public Task<List<PaymentTypeServiceDTO>> GetSupportedPaymentTypesAsync(int webShopId);
     }
 
     public class WebShopServices : IWebShopServices
@@ -50,6 +52,14 @@ namespace PaymentServiceProvider.WebApi.Services
                 .Where(e => e.Id == id && e.IsActive)
                 .Select(e => _mapper.Map<WebShopDTO>(e))
                 .SingleOrDefaultAsync();
+        }
+
+        public async Task<List<PaymentTypeServiceDTO>> GetSupportedPaymentTypesAsync(int webShopId)
+        {
+            return await _context.WebShops
+                .Where(e => e.Id == webShopId && e.IsActive)
+                .SelectMany(e => e.SupportedPaymentTypes.Where(p => p.PaymentTypeService.IsActive).Select(p => _mapper.Map<PaymentTypeServiceDTO>(p.PaymentTypeService)))
+                .ToListAsync();
         }
 
         public async Task<WebShopDTO> RegisterAsync(WebShopDTO webShopDTO)

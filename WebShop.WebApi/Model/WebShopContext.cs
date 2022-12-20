@@ -9,9 +9,11 @@ namespace WebShopApp.WebApi.Model
     {
         public DbSet<WebShop> WebShops { get; set; }
         public DbSet<Service> Services { get; set; }
+        public DbSet<SubscriptionPlan> SubscriptionPlans { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<JobPost> JobPosts { get; set; }
         public DbSet<PurchasedService> PurchasedServices { get; set; }
+        public DbSet<PurchasedSubscriptionPlan> PurchasedSubscriptionPlans { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Currency> Currencies { get; set; }
 
@@ -54,8 +56,6 @@ namespace WebShopApp.WebApi.Model
 
             modelBuilder.Entity<Service>(entity =>
             {
-                entity.HasIndex(x => new { x.Code, x.WebShopId }).IsUnique();
-
                 entity.HasOne(x => x.WebShop)
                    .WithMany(x => x.Services)
                    .HasForeignKey(x => x.WebShopId)
@@ -65,6 +65,27 @@ namespace WebShopApp.WebApi.Model
                    .WithMany(x => x.Services)
                    .HasForeignKey(x => x.CurrencyId)
                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<SubscriptionPlan>(entity =>
+            {
+                entity.HasOne(x => x.Currency)
+                   .WithMany(x => x.SubscriptionPackages)
+                   .HasForeignKey(x => x.CurrencyId)
+                   .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<PurchasedSubscriptionPlan>(entity =>
+            {
+                entity.HasOne(x => x.SubscriptionPlan)
+                    .WithMany(x => x.PurchasedSubscriptionPlans)
+                    .HasForeignKey(x => x.SubscriptionPackageId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(x => x.Company)
+                    .WithMany(x => x.PurchasedSubscriptionPlans)
+                    .HasForeignKey(x => x.CompanyId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<WebShop>(entity =>
@@ -117,76 +138,73 @@ namespace WebShopApp.WebApi.Model
                 AdminId = ADMIN_ID
             });
 
-            modelBuilder.Entity<Service>().HasData(
-               new Service
-               {
+            modelBuilder.Entity<SubscriptionPlan>().HasData(
+                new SubscriptionPlan
+                {
                     Id = 1,
-                    WebShopId = 1,
-                   Description = "Monthly Subscription",
-                    Code = "M_SUB",
+                    Description = "Monthly Subscription",
+                    NumberOfMonths = 1,
                     Price = 3,
                     CurrencyId = 1,
-                    ShowToUser = false,
+                    IsActive = true,
                 },
-                new Service
+                new SubscriptionPlan
                 {
                     Id = 2,
-                    WebShopId = 1,
                     Description = "Monthly subscription for more than 6 months",
-                    Code = "6M_SUB",
-                    Price = 2,
+                    NumberOfMonths = 6,
+                    Price = 15,
                     CurrencyId = 1,
-                    ShowToUser = false,
+                    IsActive = true,
                 },
-                new Service
+                new SubscriptionPlan
                 {
                     Id = 3,
-                    WebShopId = 1,
                     Description = "Yearly subscription",
-                    Code = "12M_SUB",
+                    NumberOfMonths = 12,
                     Price = 30,
                     CurrencyId = 1,
-                    ShowToUser = false,
-                },
+                    IsActive = true,
+                }
+            );
+
+            modelBuilder.Entity<Service>().HasData(
+               
                 new Service
                 {
                     Id = 4,
                     WebShopId = 1,
                     Description = "Service Package #1",
-                    Code = "S1",
                     Price = 2,
                     CurrencyId = 1,
-                    ShowToUser = true
+                    IsActive = true
                 },
                 new Service
                 {
                     Id = 5,
                     WebShopId = 1,
                     Description = "Service Package #2",
-                    Code = "S2",
                     Price = 3.5,
                     CurrencyId = 1,
-                    ShowToUser = true
+                    IsActive = true
                 },
                 new Service
                 {
                     Id = 6,
                     WebShopId = 1,
                     Description = "Service Package #3",
-                    Code = "S3",
                     Price = 10,
                     CurrencyId = 1,
-                    ShowToUser = true
+                    IsActive = true
                 },
                 new Service
                 {
                     Id = 7,
                     WebShopId = 1,
                     Description = "Service Package #4",
-                    Code = "S4",
                     Price = 1,
                     CurrencyId = 1,
-                    ShowToUser = true
+                    IsActive = true
                 }
             );
             #endregion

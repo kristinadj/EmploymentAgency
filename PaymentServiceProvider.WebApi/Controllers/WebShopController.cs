@@ -38,6 +38,16 @@ namespace PaymentServiceProvider.WebApi.Controllers
             return Ok(webShop);
         }
 
+        [HttpGet("SupportedPaymentTypes/{webShopId}")]
+        public async Task<ActionResult<List<PaymentTypeServiceDTO>>> GetSupportedPaymentTypes([FromRoute] int webShopId)
+        {
+            var webShop = await _webShopServices.GetByIdAsync(webShopId);
+            if (webShop == null) return NotFound();
+
+            var paymentTypes = await _webShopServices.GetSupportedPaymentTypesAsync(webShopId);
+            return Ok(paymentTypes);
+        }
+
         [HttpPost("PaymentType")]
         public async Task<ActionResult> AddPaymentType([FromQuery] int webShopId, [FromQuery] int paymentTypeServiceId)
         {

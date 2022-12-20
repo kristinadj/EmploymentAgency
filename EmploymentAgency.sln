@@ -20,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmploymentAgency.DTO", "Emp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebShopApp.WebApi", "WebShop.WebApi\WebShopApp.WebApi.csproj", "{A192B579-9911-477E-B528-2BC41A7FD047}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebShopApp.Client", "WebShopApp.Client\WebShopApp.Client.csproj", "{A8DB6160-F85A-499C-9EDE-C43B25B24E7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebShopApp.Client", "WebShopApp.Client\WebShopApp.Client.csproj", "{A8DB6160-F85A-499C-9EDE-C43B25B24E7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

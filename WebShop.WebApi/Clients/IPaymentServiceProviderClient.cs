@@ -14,6 +14,9 @@ namespace WebShopApp.WebApi.Clients
 
         [Post("WebShop/Register")]
         Task<WebShopDTO> RegisterAsync([Body] WebShopDTO webShopDTO);
+
+        [Get("WebShop/SupportedPaymentTypes/{webShopId}")]
+        Task<List<PaymentTypeServiceDTO>> GetSupportedPaymentTypesAsync([Path] int webShopId);
     }
 
     public class PaymentServiceProviderClient : IPaymentServiceProviderClient
@@ -43,6 +46,11 @@ namespace WebShopApp.WebApi.Clients
         public Task<WebShopDTO> RegisterAsync(WebShopDTO webShopDTO)
         {
             return _retryPolicy.ExecuteAsync(async () => await _client.RegisterAsync(webShopDTO));
+        }
+
+        public Task<List<PaymentTypeServiceDTO>> GetSupportedPaymentTypesAsync(int webShopId)
+        {
+            return _retryPolicy.ExecuteAsync(async () => await _client.GetSupportedPaymentTypesAsync(webShopId));
         }
     }
 }

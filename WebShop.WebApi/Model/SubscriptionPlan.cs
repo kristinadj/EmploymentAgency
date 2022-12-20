@@ -3,17 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebShopApp.WebApi.Model
 {
-    [Table("Services", Schema = "dbo")]
-    public class Service
+    [Table("SubscriptionPackages", Schema = "dbo")]
+    public class SubscriptionPlan
     {
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        public int WebShopId { get; set; }
-
         [StringLength(200)]
         public string? Description { get; set; }
+        public int NumberOfMonths { get; set; }
 
         [Required]
         public double Price { get; set; }
@@ -21,8 +19,8 @@ namespace WebShopApp.WebApi.Model
         [Required]
         public int CurrencyId { get; set; }
         public bool IsActive { get; set; }
-        public WebShop WebShop { get; set; }
+
         public Currency Currency { get; set; }
-        public ICollection<PurchasedService> PurchasedServices { get; set; }
+        public ICollection<PurchasedSubscriptionPlan> PurchasedSubscriptionPlans { get; set; }
     }
 }

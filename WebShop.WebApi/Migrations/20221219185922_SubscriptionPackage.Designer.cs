@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebShopApp.WebApi.Model;
 
@@ -11,9 +12,11 @@ using WebShopApp.WebApi.Model;
 namespace WebShopApp.WebApi.Migrations
 {
     [DbContext(typeof(WebShopContext))]
-    partial class WebShopContextModelSnapshot : ModelSnapshot
+    [Migration("20221219185922_SubscriptionPackage")]
+    partial class SubscriptionPackage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -285,6 +288,11 @@ namespace WebShopApp.WebApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
                     b.Property<int>("CurrencyId")
                         .HasColumnType("int");
 
@@ -292,11 +300,11 @@ namespace WebShopApp.WebApi.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<double>("Price")
                         .HasColumnType("float");
+
+                    b.Property<bool>("ShowToUser")
+                        .HasColumnType("bit");
 
                     b.Property<int>("WebShopId")
                         .HasColumnType("int");
@@ -307,43 +315,50 @@ namespace WebShopApp.WebApi.Migrations
 
                     b.HasIndex("WebShopId");
 
+                    b.HasIndex("Code", "WebShopId")
+                        .IsUnique();
+
                     b.ToTable("Services", "dbo");
 
                     b.HasData(
                         new
                         {
                             Id = 4,
+                            Code = "S1",
                             CurrencyId = 1,
                             Description = "Service Package #1",
-                            IsActive = true,
                             Price = 2.0,
+                            ShowToUser = true,
                             WebShopId = 1
                         },
                         new
                         {
                             Id = 5,
+                            Code = "S2",
                             CurrencyId = 1,
                             Description = "Service Package #2",
-                            IsActive = true,
                             Price = 3.5,
+                            ShowToUser = true,
                             WebShopId = 1
                         },
                         new
                         {
                             Id = 6,
+                            Code = "S3",
                             CurrencyId = 1,
                             Description = "Service Package #3",
-                            IsActive = true,
                             Price = 10.0,
+                            ShowToUser = true,
                             WebShopId = 1
                         },
                         new
                         {
                             Id = 7,
+                            Code = "S4",
                             CurrencyId = 1,
                             Description = "Service Package #4",
-                            IsActive = true,
                             Price = 1.0,
+                            ShowToUser = true,
                             WebShopId = 1
                         });
                 });
@@ -384,7 +399,7 @@ namespace WebShopApp.WebApi.Migrations
                             Id = 1,
                             CurrencyId = 1,
                             Description = "Monthly Subscription",
-                            IsActive = true,
+                            IsActive = false,
                             NumberOfMonths = 1,
                             Price = 3.0
                         },
@@ -393,7 +408,7 @@ namespace WebShopApp.WebApi.Migrations
                             Id = 2,
                             CurrencyId = 1,
                             Description = "Monthly subscription for more than 6 months",
-                            IsActive = true,
+                            IsActive = false,
                             NumberOfMonths = 6,
                             Price = 2.0
                         },
@@ -402,7 +417,7 @@ namespace WebShopApp.WebApi.Migrations
                             Id = 3,
                             CurrencyId = 1,
                             Description = "Yearly subscription",
-                            IsActive = true,
+                            IsActive = false,
                             NumberOfMonths = 12,
                             Price = 30.0
                         });
@@ -512,7 +527,7 @@ namespace WebShopApp.WebApi.Migrations
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "99116b2f-882a-4650-9914-86a44f9e6af7",
+                            ConcurrencyStamp = "1f52a17a-ac3b-4989-906c-72f221069849",
                             Email = "admin@webshop.com",
                             EmailConfirmed = false,
                             FirstName = "Joseph",
@@ -521,10 +536,10 @@ namespace WebShopApp.WebApi.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@WEBSHOP.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJdUT5OObHd4whqWuzLI/04QiQkN/L4hs0aAqjjclqS+/A68YtW8LrCmh6wITegRUA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELXEYlCGQndEA+JW6tkdKaECQSa418eHik3WsB7c7tfD3wC7dvUgR6y/uY9eDr7n2A==",
                             PhoneNumberConfirmed = false,
                             Role = 2,
-                            SecurityStamp = "0fc639ee-ddb3-456e-90b1-fa6a37f121d4",
+                            SecurityStamp = "15f4462e-a2a0-4697-a835-3b9d885bbcd1",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });

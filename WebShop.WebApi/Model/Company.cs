@@ -42,5 +42,6 @@ namespace WebShopApp.WebApi.Model
         public User ManagedByUser { get; set; }
         public ICollection<JobPost> JobPosts { get; set; }
         public ICollection<PurchasedService> PurchasedServices { get; set; }
+        public ICollection<PurchasedSubscriptionPlan> PurchasedSubscriptionPlans { get; set; }
     }
 }

@@ -64,7 +64,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 #region Services
 builder.Services.AddScoped<ITokenCreationService, JwtService>();
-
+builder.Services.AddScoped<IWebShopServices, WebShopServices>();
+builder.Services.AddScoped<ISubscriptionPlanServices, SubscriptionPlanServices>();
 #endregion
 
 var app = builder.Build();

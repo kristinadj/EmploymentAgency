@@ -14,6 +14,9 @@ namespace WebShopApp.WebApi.Mappings
 
             CreateMap<UserDTO, User>()
                 .ForMember(d => d.UserName, s => s.MapFrom(x => x.Username));
+
+            CreateMap<SubscriptionPlan, SubscriptionPlanDTO>()
+                .ForMember(d => d.CurrencyCode, s => s.MapFrom(x => x.Currency.Code));
         }
     }
 }

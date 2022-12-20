@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
 using EmploymentAgency.DTO;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebShopApp.WebApi.Model;
-using WebShopApp.WebApi.Services;
 
 namespace WebShopApp.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("CorsPolicy")]
     public class CompanyController : ControllerBase
     {
         private readonly UserManager<User> _userManager;

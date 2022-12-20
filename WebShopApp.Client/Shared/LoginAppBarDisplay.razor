@@ -1,4 +1,15 @@
-﻿<AuthorizeView>
+﻿
+<AuthorizeView Roles="USER">
+    <Authorized>
+        <MudStack Row="false" Spacing="0" AlignItems="AlignItems.End" Class="pe-4">
+            <MudText  Typo="Typo.subtitle1">User</MudText>
+            <MudButton>Upgrade to Premium</MudButton>
+        </MudStack>
+        <MudButton Href="/logout" Color="Color.Inherit">Logout</MudButton>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView>
     <Authorized>
         <MudStack Row="false" Spacing="0" AlignItems="AlignItems.End" Class="pe-4">
             <MudText Typo="Typo.h6"> Company Name </MudText>
@@ -8,6 +19,6 @@
     </Authorized>
 
     <NotAuthorized>
-        <MudButton Color="Color.Inherit">Register Company</MudButton>
+        <MudButton Href="/registerCompany" Color="Color.Inherit">Register Company</MudButton>
     </NotAuthorized>
 </AuthorizeView>
