@@ -1,4 +1,4 @@
-﻿namespace EmploymentAgency.DTO
+﻿namespace EmploymentAgency.DTO.Shared
 {
     public class PaymentTypeServiceDTO
     {

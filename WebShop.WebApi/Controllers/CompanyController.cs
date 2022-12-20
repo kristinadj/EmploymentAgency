@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EmploymentAgency.DTO;
+using EmploymentAgency.DTO.WebShop;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

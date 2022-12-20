@@ -30,5 +30,6 @@ namespace PaymentServiceProvider.WebApi.Model
         public WebShop ParentWebShop { get; set; }
         public ICollection<WebShop> SubWebShops { get; set; }
         public ICollection<SupportedPaymentTypeService> SupportedPaymentTypes { get; set; }
+        public ICollection<Invoice> Invoices { get; set; }
     }
 }

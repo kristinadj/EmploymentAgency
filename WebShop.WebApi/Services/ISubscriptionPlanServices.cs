@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EmploymentAgency.DTO;
+using EmploymentAgency.DTO.WebShop;
 using Microsoft.EntityFrameworkCore;
 using WebShopApp.WebApi.Model;
 
@@ -7,7 +7,7 @@ namespace WebShopApp.WebApi.Services
 {
     public interface ISubscriptionPlanServices
     {
-        public Task<List<SubscriptionPlanDTO>> GetSubscriptionPlansAsync();
+        Task<List<SubscriptionPlanDTO>> GetSubscriptionPlansAsync();
     }
     public class SubscriptionPlanServices : ISubscriptionPlanServices
     {

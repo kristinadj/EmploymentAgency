@@ -18,5 +18,7 @@ namespace WebShopApp.WebApi.Model
 
         public ICollection<Service> Services { get; set; }
         public ICollection<SubscriptionPlan> SubscriptionPackages { get; set; }
+        public ICollection<Invoice> Invoices { get; set; }
+        public ICollection<InvoiceItem> InvoiceItems { get; set; }
     }
 }

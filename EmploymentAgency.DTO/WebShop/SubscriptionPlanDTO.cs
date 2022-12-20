@@ -1,4 +1,4 @@
-﻿namespace EmploymentAgency.DTO
+﻿namespace EmploymentAgency.DTO.WebShop
 {
     public class SubscriptionPlanDTO
     {

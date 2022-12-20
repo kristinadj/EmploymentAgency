@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EmploymentAgency.DTO
+namespace EmploymentAgency.DTO.WebShop
 {
     public class RegisterCompanyDTO
     {

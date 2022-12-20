@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EmploymentAgency.DTO;
+using EmploymentAgency.DTO.Shared;
 using Microsoft.EntityFrameworkCore;
 using WebShopApp.WebApi.Model;
 
@@ -7,7 +7,9 @@ namespace WebShopApp.WebApi.Services
 {
     public interface IWebShopServices
     {
-        public Task<WebShopDTO> GetParentWebShopAsync();
+        Task<WebShopDTO> GetParentWebShopAsync();
+        Task UpdatePaymentServiceProviderWebShopId(int webShopId, int paymentServiceProviderWebShopId);
+        Task<int?> GetPaymentServideProviderWebShopIdAsync(int webShopId);
     }
 
     public class WebShopServices : IWebShopServices
@@ -27,6 +29,24 @@ namespace WebShopApp.WebApi.Services
                 .Where(e => e.ParentWebShopId == null && e.IsActive)
                 .Select(e => _mapper.Map<WebShopDTO>(e))
                 .SingleOrDefaultAsync();
+        }
+
+        public async Task<int?> GetPaymentServideProviderWebShopIdAsync(int webShopId)
+        {
+            return await _context.WebShops
+                .Where(e => e.Id == webShopId && e.IsActive)
+                .Select(e => e.PaymentServiceProviderWebShopId)
+                .SingleOrDefaultAsync();
+        }
+
+        public async Task UpdatePaymentServiceProviderWebShopId(int webShopId, int paymentServiceProviderWebShopId)
+        {
+            var webShop = await _context.WebShops
+                .Where(e => e.Id == webShopId && e.IsActive)
+                .SingleOrDefaultAsync();
+            webShop.PaymentServiceProviderWebShopId = paymentServiceProviderWebShopId;
+
+            await _context.SaveChangesAsync();
         }
     }
 }

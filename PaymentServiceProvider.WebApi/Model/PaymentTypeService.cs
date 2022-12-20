@@ -19,5 +19,6 @@ namespace PaymentServiceProvider.WebApi.Model
         public bool IsActive { get; set; }
 
         public List<SupportedPaymentTypeService> SupportedPaymentTypes { get; set; }
+        public List<Transaction> Transactions { get; set; }
     }
 }

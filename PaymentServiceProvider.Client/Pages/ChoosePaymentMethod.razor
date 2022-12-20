@@ -1,0 +1,78 @@
+﻿@page "/invoices/{invoiceId}"
+
+@using EmploymentAgency.DTO.PaymentServiceProvider
+@using EmploymentAgency.DTO.Shared
+@using PaymentServiceProvider.Client.Services
+
+@inject IApiServices ApiServices
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Invoice</h5>
+                    <p><b>Amount:</b> @invoice.Amount @invoice.CurrencyCode</p>
+                    <br/>
+                    <form>
+                         <p>Select Payment type:</p>
+                         <div>
+                             @foreach (var paymentType in supportedPaymentTypes)
+                             {
+                                 <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="@paymentType.Id" name="paymentType" value="@paymentType.Id" onclick="@(() => selectedPaymentTypeId == paymentType.Id)">@paymentType.Name
+                                    <label class="form-check-label" for="@paymentType.Id"></label>
+                                </div>
+                             }
+                         </div>
+                    </form>
+                    <div class="pa-2">
+                        <button type="button" onclick="OnClickPay" class="@GetButtonClass">Pay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm"></div>
+    </div>
+</div>
+
+@code {
+        [Parameter]
+        public int InvoiceId { get; set; }
+
+    private InvoiceDTO invoice = new InvoiceDTO();
+    private List<PaymentTypeServiceDTO> supportedPaymentTypes = new List<PaymentTypeServiceDTO>();
+    private int? selectedPaymentTypeId { get; set; }
+
+    protected override async void OnInitialized()
+    {
+        var invoice = await ApiServices.GetInvoiceByIdAsync(InvoiceId);
+        supportedPaymentTypes = await ApiServices.GetPaymentTypeServicesAsync(invoice.WebShopId);
+    }
+
+    private string GetButtonClass()
+    {
+        if (selectedPaymentTypeId == null)
+            return "btn btn-primary disabled";
+        else
+            return "btn btn-primary";
+    }
+
+    private async Task OnClickPay()
+    {
+        try
+        {
+            var request = new PayInvoiceDTO
+            {
+                InvoiceId = invoice.Id,
+                PaymentServiceTypeId = (int)selectedPaymentTypeId
+            };
+            await ApiServices.PayInvoiceAsync(request);
+        }
+        catch (Exception)
+        {
+            // TODO: Toast
+        }
+    }
+}

@@ -9,6 +9,8 @@ namespace WebShopApp.WebApi.Model
         [Key]
         public int Id { get; set; }
 
+        public int PaymentServiceProviderWebShopId { get; set; }
+
         [Required]
         [StringLength(30)]
         public string Name { get; set; }
@@ -21,5 +23,6 @@ namespace WebShopApp.WebApi.Model
         public User Admin { get; set; }
         public ICollection<WebShop> SubWebShops { get; set; }
         public ICollection<Service> Services { get; set; }
+        public ICollection<Invoice> Invoices { get; set; }
     }
 }

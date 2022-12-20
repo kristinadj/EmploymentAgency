@@ -19,7 +19,7 @@ builder.Services.AddHealthChecks();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 #region Services
-builder.Services.AddScoped<IPaymentTypeServices, PaymentTypeServices>();
+builder.Services.AddScoped<IPaymentServices, PaymentServices>();
 builder.Services.AddScoped<IWebShopServices, WebShopServices>();
 #endregion
 

@@ -1,4 +1,4 @@
-﻿using EmploymentAgency.DTO;
+﻿using EmploymentAgency.DTO.Shared;
 using Polly;
 using Polly.Retry;
 using RestEase;
@@ -17,6 +17,9 @@ namespace WebShopApp.WebApi.Clients
 
         [Get("WebShop/SupportedPaymentTypes/{webShopId}")]
         Task<List<PaymentTypeServiceDTO>> GetSupportedPaymentTypesAsync([Path] int webShopId);
+
+        [Post("Invoice")]
+        Task<RedirectUriDTO> CreateInvoiceAsync();
     }
 
     public class PaymentServiceProviderClient : IPaymentServiceProviderClient
@@ -51,6 +54,11 @@ namespace WebShopApp.WebApi.Clients
         public Task<List<PaymentTypeServiceDTO>> GetSupportedPaymentTypesAsync(int webShopId)
         {
             return _retryPolicy.ExecuteAsync(async () => await _client.GetSupportedPaymentTypesAsync(webShopId));
+        }
+
+        public Task<RedirectUriDTO> CreateInvoiceAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

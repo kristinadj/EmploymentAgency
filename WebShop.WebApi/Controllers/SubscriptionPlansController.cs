@@ -1,4 +1,4 @@
-﻿using EmploymentAgency.DTO;
+﻿using EmploymentAgency.DTO.WebShop;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using WebShopApp.WebApi.Services;

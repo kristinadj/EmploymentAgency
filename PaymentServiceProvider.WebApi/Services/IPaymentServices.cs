@@ -1,25 +1,25 @@
 ﻿using AutoMapper;
-using EmploymentAgency.DTO;
+using EmploymentAgency.DTO.Shared;
 using Microsoft.EntityFrameworkCore;
 using PaymentServiceProvider.WebApi.Model;
 
 namespace PaymentServiceProvider.WebApi.Services
 {
-    public interface IPaymentTypeServices
+    public interface IPaymentServices
     {
-        public Task<List<PaymentTypeServiceDTO>> GetAllAsync();
-        public Task<PaymentTypeServiceDTO?> GetByIdAsync(int id);
-        public Task<PaymentTypeServiceDTO?> GetByNameAsync(string name);
-        public Task<PaymentTypeServiceDTO> AddAsync(PaymentTypeServiceDTO paymentServiceDTO);
-        public Task<PaymentTypeServiceDTO?> RemoveAsync(int id);
+        Task<List<PaymentTypeServiceDTO>> GetAllAsync();
+        Task<PaymentTypeServiceDTO?> GetByIdAsync(int id);
+        Task<PaymentTypeServiceDTO?> GetByNameAsync(string name);
+        Task<PaymentTypeServiceDTO> AddAsync(PaymentTypeServiceDTO paymentServiceDTO);
+        Task<PaymentTypeServiceDTO?> RemoveAsync(int id);
     }
 
-    public class PaymentTypeServices : IPaymentTypeServices
+    public class PaymentServices : IPaymentServices
     {
         private readonly PaymentServiceProviderContext _context;
         private readonly IMapper _mapper;
 
-        public PaymentTypeServices(PaymentServiceProviderContext context, IMapper mapper)
+        public PaymentServices(PaymentServiceProviderContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

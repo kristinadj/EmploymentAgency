@@ -1,5 +1,6 @@
 ﻿using BankPaymentService.WebApi.Clients;
 using EmploymentAgency.DTO;
+using EmploymentAgency.DTO.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankPaymentService.WebApi.Controllers

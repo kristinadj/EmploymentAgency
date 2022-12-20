@@ -1,4 +1,4 @@
-﻿using EmploymentAgency.DTO;
+﻿using EmploymentAgency.DTO.Shared;
 using Microsoft.AspNetCore.Mvc;
 using PaymentServiceProvider.WebApi.Services;
 

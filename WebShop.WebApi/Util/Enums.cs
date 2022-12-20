@@ -14,4 +14,9 @@
     {
         USER, COMPANY_MANAGER, WEB_SHOP_ADMIN
     }
+
+    public enum IssuedToType
+    {
+        USER, COMPANY
+    }
 }

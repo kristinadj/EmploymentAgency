@@ -1,4 +1,4 @@
-﻿using EmploymentAgency.DTO;
+﻿using EmploymentAgency.DTO.WebShop;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -9,7 +9,7 @@ namespace WebShopApp.WebApi.Services
 {
     public interface ITokenCreationService
     {
-        public LoginResultDTO CreateToken(User user);
+        LoginResultDTO CreateToken(User user);
     }
 
     public class JwtService : ITokenCreationService

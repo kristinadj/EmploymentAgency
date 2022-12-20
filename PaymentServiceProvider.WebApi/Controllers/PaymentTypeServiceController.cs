@@ -1,4 +1,4 @@
-﻿using EmploymentAgency.DTO;
+﻿using EmploymentAgency.DTO.Shared;
 using Microsoft.AspNetCore.Mvc;
 using PaymentServiceProvider.WebApi.Clients;
 using PaymentServiceProvider.WebApi.Services;
@@ -9,10 +9,10 @@ namespace PaymentServiceProvider.WebApi.Controllers
     [Route("api/[controller]")]
     public class PaymentTypeServiceController : ControllerBase
     {
-        private readonly IPaymentTypeServices _paymentTypeServices;
+        private readonly IPaymentServices _paymentTypeServices;
         private readonly PaymentTypeServiceClient _paymentTypeServiceClient;
 
-        public PaymentTypeServiceController(IPaymentTypeServices paymentTypeServices, PaymentTypeServiceClient paymentTypeServiceClient)
+        public PaymentTypeServiceController(IPaymentServices paymentTypeServices, PaymentTypeServiceClient paymentTypeServiceClient)
         {
             _paymentTypeServices = paymentTypeServices;
             _paymentTypeServiceClient = paymentTypeServiceClient;

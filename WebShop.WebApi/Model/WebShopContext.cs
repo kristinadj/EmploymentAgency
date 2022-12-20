@@ -16,7 +16,8 @@ namespace WebShopApp.WebApi.Model
         public DbSet<PurchasedSubscriptionPlan> PurchasedSubscriptionPlans { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Currency> Currencies { get; set; }
-
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<InvoiceItem> InvoiceItems { get; set; }
         public WebShopContext(DbContextOptions<WebShopContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -102,6 +103,32 @@ namespace WebShopApp.WebApi.Model
             {
                 entity.Property(x => x.ManagedCompanyId).IsRequired(false);
                 entity.Property(x => x.AdminToWebShopId).IsRequired(false);
+            });
+
+            modelBuilder.Entity<Invoice>(entity =>
+            {
+                entity.HasOne(x => x.Currency)
+                    .WithMany(x => x.Invoices)
+                    .HasForeignKey(x => x.CurrencyId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(x => x.WebShop)
+                    .WithMany(x => x.Invoices)
+                    .HasForeignKey(x => x.WebShopId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<InvoiceItem>(entity =>
+            {
+                entity.HasOne(x => x.Currency)
+                    .WithMany(x => x.InvoiceItems)
+                    .HasForeignKey(x => x.CurrencyId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(x => x.Invoice)
+                    .WithMany(x => x.InvoiceItems)
+                    .HasForeignKey(x => x.InvoiceId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             #region Database Initialization

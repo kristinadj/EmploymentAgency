@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EmploymentAgency.DTO;
+using EmploymentAgency.DTO.Shared;
 using PaymentServiceProvider.WebApi.Model;
 
 namespace PaymentServiceProvider.WebApi.Mappings

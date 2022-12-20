@@ -1,4 +1,5 @@
-﻿using EmploymentAgency.DTO;
+﻿using EmploymentAgency.DTO.Shared;
+using EmploymentAgency.DTO.WebShop;
 using System.Text.Json;
 
 namespace WebShopApp.Client.Services

@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebShopApp.WebApi", "WebSho
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebShopApp.Client", "WebShopApp.Client\WebShopApp.Client.csproj", "{A8DB6160-F85A-499C-9EDE-C43B25B24E7B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentServiceProvider.Client", "PaymentServiceProvider.Client\PaymentServiceProvider.Client.csproj", "{78480627-330F-4EC7-AF17-D659F1166CEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{A8DB6160-F85A-499C-9EDE-C43B25B24E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8DB6160-F85A-499C-9EDE-C43B25B24E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8DB6160-F85A-499C-9EDE-C43B25B24E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78480627-330F-4EC7-AF17-D659F1166CEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78480627-330F-4EC7-AF17-D659F1166CEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78480627-330F-4EC7-AF17-D659F1166CEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78480627-330F-4EC7-AF17-D659F1166CEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

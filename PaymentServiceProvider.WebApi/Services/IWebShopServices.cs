@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EmploymentAgency.DTO;
+using EmploymentAgency.DTO.Shared;
 using Microsoft.EntityFrameworkCore;
 using PaymentServiceProvider.WebApi.Model;
 
@@ -7,12 +7,12 @@ namespace PaymentServiceProvider.WebApi.Services
 {
     public interface IWebShopServices
     {
-        public Task<WebShopDTO> RegisterAsync(WebShopDTO webShopDTO);
-        public Task<WebShopDTO?> GetByIdAsync(int id);
-        public Task<bool> AddPaymentTypeAsync(int webShopId, int paymentTypeServiceId);
-        public Task<bool> RemovePaymentTypeAsync(int webShopId, int paymentTypeServiceId);
+        Task<WebShopDTO> RegisterAsync(WebShopDTO webShopDTO);
+        Task<WebShopDTO?> GetByIdAsync(int id);
+        Task<bool> AddPaymentTypeAsync(int webShopId, int paymentTypeServiceId);
+        Task<bool> RemovePaymentTypeAsync(int webShopId, int paymentTypeServiceId);
 
-        public Task<List<PaymentTypeServiceDTO>> GetSupportedPaymentTypesAsync(int webShopId);
+        Task<List<PaymentTypeServiceDTO>> GetSupportedPaymentTypesAsync(int webShopId);
     }
 
     public class WebShopServices : IWebShopServices
@@ -66,11 +66,15 @@ namespace PaymentServiceProvider.WebApi.Services
         {
             var webShop = _mapper.Map<WebShop>(webShopDTO);
             webShop.IsActive = true;
+            webShop.Id = 0;
 
             _context.WebShops.Add(webShop);
             await _context.SaveChangesAsync();
 
+            var webShopIdApp = webShopDTO.Id;
             webShopDTO = _mapper.Map<WebShopDTO>(webShop);
+            webShopDTO.Id = webShopIdApp;
+            webShopDTO.PaymentServiceProviderWebShopId = webShop.Id;
             return webShopDTO;
         }
 

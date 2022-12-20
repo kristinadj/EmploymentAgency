@@ -1,5 +1,5 @@
 ﻿using Blazored.LocalStorage;
-using EmploymentAgency.DTO;
+using EmploymentAgency.DTO.WebShop;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;

@@ -1,7 +1,9 @@
 using EmploymentAgency.DTO;
+using EmploymentAgency.DTO.Shared;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using WebShopApp.WebApi.Clients;
+using WebShopApp.WebApi.Services;
 
 namespace WebShopApp.WebApi.Controllers
 {
@@ -11,16 +13,21 @@ namespace WebShopApp.WebApi.Controllers
     public class PaymentServiceProviderController : ControllerBase
     {
         private readonly IPaymentServiceProviderClient _paymentServiceProviderClient;
+        private readonly IWebShopServices _webShopService;
         private readonly IConfiguration _configuration;
 
-        public PaymentServiceProviderController(IPaymentServiceProviderClient paymentServiceProviderClient, IConfiguration configuration)
+        public PaymentServiceProviderController(
+            IPaymentServiceProviderClient paymentServiceProviderClient, 
+            IWebShopServices webShopService, 
+            IConfiguration configuration)
         {
             _paymentServiceProviderClient = paymentServiceProviderClient;
+            _webShopService = webShopService;
             _configuration = configuration;
         }
 
         [HttpGet("Register")]
-        public async Task<ActionResult> Register()
+        public async Task<ActionResult> Register([FromRoute] int webShopId)
         {
             try
             {
@@ -32,7 +39,9 @@ namespace WebShopApp.WebApi.Controllers
                     TransactionFailureWebhook = _configuration["WeebhookUri:Failure"],
                     TransactionErrorWebhook = _configuration["WeebhookUri:Error"]
                 };
-                await _paymentServiceProviderClient.RegisterAsync(dto);
+                var webShop = await _paymentServiceProviderClient.RegisterAsync(dto);
+                await _webShopService.UpdatePaymentServiceProviderWebShopId(webShopId, webShop.PaymentServiceProviderWebShopId);
+
                 return Ok();
             }
             catch (Exception e)
@@ -42,7 +51,7 @@ namespace WebShopApp.WebApi.Controllers
         }
 
         [HttpGet("SupportedPaymentTypes/{webShopId}")]
-        public async Task<ActionResult<List<PaymentTypeServiceDTO>>> GetSupportedPaymentTypes([FromRoute] int webShopId)
+        public ActionResult<List<PaymentTypeServiceDTO>> GetSupportedPaymentTypes([FromRoute] int webShopId)
         {
             try
             {
@@ -56,6 +65,7 @@ namespace WebShopApp.WebApi.Controllers
                         Uri = "http://BankPaymentService/api/Card/",
                         IsActive = true,
                     },
+                    /*
                     new PaymentTypeServiceDTO
                     {
                         Id = 1,
@@ -76,7 +86,7 @@ namespace WebShopApp.WebApi.Controllers
                         Name = "Bitcoin",
                         Uri = "",
                         IsActive = true,
-                    }
+                    }*/
                 };
                 return Ok(supportedPaymentTypes);
             }

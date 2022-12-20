@@ -1,4 +1,4 @@
-﻿using EmploymentAgency.DTO;
+﻿using EmploymentAgency.DTO.Shared;
 using Polly;
 using Polly.Retry;
 using RestEase;

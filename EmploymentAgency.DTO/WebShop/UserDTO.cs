@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmploymentAgency.DTO
+namespace EmploymentAgency.DTO.WebShop
 {
     public class UserDTO
     {
